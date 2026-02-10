@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../public/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>BernimGame</title>
 </head>
 <body>
 
 <h1>berNimGame</h1>
 <?php var_dump($messages) ?>
+
+      <div class="themeToggle">
+    <button id="themeToggleBtn" class="toggle-btn">
+        <i class="fa-solid fa-moon"></i>
+    </button>
+</div>
 
 <!-- Messages de configuration -->
 <div class="messages-settings">
