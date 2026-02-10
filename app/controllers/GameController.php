@@ -126,4 +126,25 @@ public function home(){
 }
 
 
+// fin de partie
+private function renderEnd() {
+    $messages = $_SESSION['messages'] ?? [];
+    $winner   = $_SESSION['winner'] ?? null;
+    $mode     = $_SESSION['mode'] ?? null;
+
+    require "../app/views/end.php";
+}
+
+// btn reset
+public function reset() {
+    session_start();
+    session_unset();
+    session_destroy();
+    header("Location: ?action=home");
+    exit;
+}
+
+
+
+
 }

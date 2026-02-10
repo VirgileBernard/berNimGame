@@ -3,11 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../public/style.css">
-    <title>BernimGame – Partie</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>BernimGame</title>
 </head>
 <body>
 
 <h1>berNimGame</h1>
+<div class="themeToggle">
+    <button id="themeToggleBtn" class="toggle-btn">
+        <i class="fa-solid fa-moon"></i>
+    </button>
+</div>
+
 
 <!-- Messages -->
 <div class="messages-jeu">
@@ -62,62 +69,7 @@
     </form>
 <?php endif; ?>
 
-<!-- JS pour les bâtons -->
-<script>
-document.querySelectorAll(".baton").forEach(baton => {
-
-    baton.addEventListener("mouseenter", () => {
-        const ligne = baton.dataset.ligne;
-        const index = parseInt(baton.dataset.index);
-
-        document.querySelectorAll(`.baton[data-ligne="${ligne}"]`).forEach(b => {
-            if (parseInt(b.dataset.index) <= index) {
-                b.classList.add("preview");
-            }
-        });
-    });
-
-    baton.addEventListener("mouseleave", () => {
-        document.querySelectorAll(".baton.preview").forEach(b => {
-            b.classList.remove("preview");
-        });
-    });
-
-    baton.addEventListener("click", () => {
-        const ligne = baton.dataset.ligne;
-        const index = parseInt(baton.dataset.index);
-
-        document.querySelectorAll(`.baton[data-ligne="${ligne}"]`).forEach(b => {
-            if (parseInt(b.dataset.index) <= index) {
-                b.classList.add("disappear");
-            }
-        });
-
-        setTimeout(() => {
-            const form = document.createElement("form");
-            form.method = "post";
-            form.action = "?action=play";
-
-            const inputLigne = document.createElement("input");
-            inputLigne.type = "hidden";
-            inputLigne.name = "ligne";
-            inputLigne.value = ligne;
-
-            const inputChoix = document.createElement("input");
-            inputChoix.type = "hidden";
-            inputChoix.name = "choix";
-            inputChoix.value = index + 1;
-
-            form.appendChild(inputLigne);
-            form.appendChild(inputChoix);
-            document.body.appendChild(form);
-
-            form.submit();
-        }, 300);
-    });
-
-});
-</script>
+<script src="../public/script.js"></script>
 
 </body>
 </html>
