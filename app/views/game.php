@@ -31,11 +31,8 @@
 <?php if (!$game_over): ?>
     <p class="tour-actuel <?= $tour ?>">
         <?php
-            if ($mode === "joueur") {
-                echo ($tour === "joueur1") ? "Tour de Joueur 1" : "Tour de Joueur 2";
-            } else {
-                echo ($tour === "joueur1") ? "Votre tour" : "Tour de l'ordinateur";
-            }
+       echo ($tour === "joueur1") ? "Votre tour" : "Tour de l'ordinateur";
+
         ?>
     </p>
 <?php endif; ?>

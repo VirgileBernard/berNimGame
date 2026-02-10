@@ -1,150 +1,166 @@
 <?php
 
-class GameController{
+class GameController {
 
-public function start() {
-    session_start();
+    public function start() {
+        session_start();
 
-    $mode = $_POST['mode'] ?? null;
-    $nbLignes = isset($_POST['nbLignes']) ? (int)$_POST['nbLignes'] : null;
+        // Mode forcé : toujours contre l'ordinateur
+        $mode = "ordi";
+        $nbLignes = isset($_POST['nbLignes']) ? (int)$_POST['nbLignes'] : null;
 
-    if (!$mode || !$nbLignes) {
-        $_SESSION['messages'][] = ['text' => "Formulaire incomplet", 'class' => 'error'];
+        if (!$nbLignes) {
+            $_SESSION['messages'][] = ['text' => "Formulaire incomplet", 'class' => 'error'];
+            header("Location: ?action=home");
+            exit;
+        }
+
+        $_SESSION['mode'] = "ordi";
+
+        // Génération de la pyramide
+        $pyramide = [];
+        for ($i = 1; $i <= $nbLignes; $i++) {
+            $pyramide[] = rand(1, 7);
+        }
+        $_SESSION['pyramide'] = $pyramide;
+
+        // Tirage du premier joueur
+        $_SESSION['tour'] = rand(0,1) ? "joueur1" : "ordi";
+
+        $_SESSION['messages'][] = ['text' => "Pyramide créée.", 'class' => 'setting'];
+
+        // Si l'IA commence, on la laisse jouer
+        if ($_SESSION['tour'] === "ordi") {
+            header("Location: ?action=ia");
+            exit;
+        }
+
+        $this->renderGame();
+    }
+
+
+    private function renderGame() {
+        $messages  = $_SESSION['messages'];
+        $pyramide  = $_SESSION['pyramide'];
+        $tour      = $_SESSION['tour'];
+        $mode      = $_SESSION['mode'];
+        $game_over = $_SESSION['game_over'] ?? false;
+
+        require "../app/views/game.php";
+    }
+
+
+    public function play() {
+        session_start();
+
+        $ligne = (int)$_POST['ligne'];
+        $choix = (int)$_POST['choix'];
+
+        $pyramide = $_SESSION['pyramide'];
+        $tour = $_SESSION['tour'];
+
+        // Vérification du coup
+        if ($choix < 1 || $choix > $pyramide[$ligne]) {
+            $_SESSION['messages'][] = ['text' => "Coup invalide.", 'class' => 'error'];
+            return $this->renderGame();
+        }
+
+        // Application du coup
+        $pyramide[$ligne] -= $choix;
+        $_SESSION['pyramide'] = $pyramide;
+
+        $_SESSION['messages'][] = [
+            'text' => "Vous retirez $choix bâton(s) de la ligne " . ($ligne + 1),
+            'class' => 'joueur1'
+        ];
+
+        // Fin de partie ?
+        if (array_sum($pyramide) === 0) {
+            $_SESSION['game_over'] = true;
+            $_SESSION['winner'] = "joueur1";
+            return $this->renderEnd();
+        }
+
+        // Tour de l'ordinateur
+        $_SESSION['tour'] = "ordi";
+        return $this->renderGame();
+    }
+
+
+    private function initSession() {
+        if (!isset($_SESSION['initialized'])) {
+            $_SESSION['initialized'] = true;
+
+            $_SESSION['messages'] = [
+                ['text' => "Bienvenue dans le berNimGame !", 'class' => 'setting']
+            ];
+
+            $_SESSION['tour'] = "joueur1";
+            $_SESSION['mode'] = "ordi";
+            $_SESSION['game_over'] = false;
+        }
+    }
+
+
+    public function home() {
+        session_start();
+        $this->initSession();
+
+        $messages = $_SESSION['messages'] ?? [];
+        $pyramide = $_SESSION['pyramide'] ?? null;
+        $tour = $_SESSION['tour'] ?? null;
+        $mode = $_SESSION['mode'] ?? null;
+        $game_over = $_SESSION['game_over'] ?? false;
+
+        require "../app/views/home.php";
+    }
+
+
+    private function renderEnd() {
+        $messages = $_SESSION['messages'] ?? [];
+        $winner   = $_SESSION['winner'] ?? null;
+
+        require "../app/views/end.php";
+    }
+
+
+    public function reset() {
+        session_start();
+        session_unset();
+        session_destroy();
         header("Location: ?action=home");
         exit;
     }
 
-    $_SESSION['mode'] = $mode;
 
-    $pyramide = [];
-    for ($i = 1; $i <= $nbLignes; $i++) {
-        $pyramide[] = rand(1, 7);
-    }
-    $_SESSION['pyramide'] = $pyramide;
-
-    $_SESSION['tour'] = rand(0,1) ? "joueur1" : ($mode === "ordi" ? "ordi" : "joueur2");
-
-    $_SESSION['messages'][] = ['text' => "Pyramide créée.", 'class' => 'setting'];
-
-    if ($mode === "ordi" && $_SESSION['tour'] === "ordi") {
-        header("Location: ?action=ia");
-        exit;
-    }
-
-    $this->renderGame();
-}
-
-
-private function renderGame() {
-    $messages  = $_SESSION['messages'];
-    $pyramide  = $_SESSION['pyramide'];
-    $tour      = $_SESSION['tour'];
-    $mode      = $_SESSION['mode'];
-    $game_over = $_SESSION['game_over'] ?? false;
-    var_dump($pyramide);
-
-
-    
-    require "../app/views/game.php";
-}
-
-
-public function play() {
+    public function ia() {
     session_start();
 
-    // Récupération des données du formulaire
-    $ligne = (int)$_POST['ligne'];
-    $choix = (int)$_POST['choix'];
+    $p = $_SESSION['pyramide'];
 
-    // Récupération de l'état du jeu
-    $pyramide = $_SESSION['pyramide'];
-    $tour = $_SESSION['tour'];
-    $mode = $_SESSION['mode'];
-
-    // Vérification du coup
-    if ($choix < 1 || $choix > $pyramide[$ligne]) {
-        $_SESSION['messages'][] = ['text' => "Coup invalide.", 'class' => 'error'];
-        return $this->renderGame();
-    }
+    // Calcul du coup optimal
+    require_once "../app/models/IA.php";
+    [$ligne, $choix] = IA::coup($p);
 
     // Application du coup
-    $pyramide[$ligne] -= $choix;
-    $_SESSION['pyramide'] = $pyramide;
+    $p[$ligne] -= $choix;
+    $_SESSION['pyramide'] = $p;
 
     $_SESSION['messages'][] = [
-        'text' => "$tour retire $choix bâton(s) de la ligne " . ($ligne + 1),
-        'class' => $tour
+        'text' => "L'ordinateur retire $choix bâton(s) de la ligne " . ($ligne + 1),
+        'class' => 'ordi'
     ];
 
-    // Vérification fin de partie
-    if (array_sum($pyramide) === 0) {
+    // Fin de partie ?
+    if (array_sum($p) === 0) {
         $_SESSION['game_over'] = true;
-        $_SESSION['winner'] = ($mode === "ordi") ? "joueur1" : $tour;
+        $_SESSION['winner'] = "ordi";
         return $this->renderEnd();
     }
 
-    // Changement de tour
-    if ($mode === "joueur") {
-        $_SESSION['tour'] = ($tour === "joueur1") ? "joueur2" : "joueur1";
-        return $this->renderGame();
-    }
-
-    // Mode joueur vs IA → l’IA joue ensuite
-    $_SESSION['tour'] = "ordi";
+    // Retour au joueur
+    $_SESSION['tour'] = "joueur1";
     return $this->renderGame();
 }
-
-private function initSession() {
-    if (!isset($_SESSION['initialized'])) {
-        $_SESSION['initialized'] = true;
-
-        $_SESSION['messages'] = [
-            ['text' => "Bienvenue dans le berNimGame !", 'class' => 'setting']
-        ];
-
-        $_SESSION['tour'] = "joueur1";
-        $_SESSION['mode'] = null;
-        $_SESSION['game_over'] = false;
-    }
-}
-
-
-
-
-
-public function home(){
-    session_start();
-    $this->initSession();
-
-    $messages = $_SESSION['messages'] ?? [];
-    $pyramide = $_SESSION['pyramide'] ?? null;
-    $tour = $_SESSION['tour'] ?? null;
-    $mode = $_SESSION['mode'] ?? null;
-    $game_over = $_SESSION['game_over'] ?? false;
-    
-    require "../app/views/home.php";
-}
-
-
-// fin de partie
-private function renderEnd() {
-    $messages = $_SESSION['messages'] ?? [];
-    $winner   = $_SESSION['winner'] ?? null;
-    $mode     = $_SESSION['mode'] ?? null;
-
-    require "../app/views/end.php";
-}
-
-// btn reset
-public function reset() {
-    session_start();
-    session_unset();
-    session_destroy();
-    header("Location: ?action=home");
-    exit;
-}
-
-
-
 
 }

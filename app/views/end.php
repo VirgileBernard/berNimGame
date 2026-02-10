@@ -19,13 +19,7 @@
 <div class="end-container">
 
     <h2 class="winner">
-        <?php
-            if ($mode === "ordi") {
-                echo ($winner === "joueur1") ? "Vous avez gagné 🎉" : "L'ordinateur a gagné 🤖";
-            } else {
-                echo ($winner === "joueur1") ? "Joueur 1 a gagné 🎉" : "Joueur 2 a gagné 🎉";
-            }
-        ?>
+        <?= ($winner === "joueur1") ? "Vous avez gagné 🎉" : "L'ordinateur a gagné 🤖" ?>
     </h2>
 
     <div class="messages-end">
