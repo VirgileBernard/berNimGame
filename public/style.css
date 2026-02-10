@@ -69,9 +69,19 @@ h1{
 }
 
 
-.pyramide{
-    height: 50vh;
+.preview-pyramide {
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
 }
+
+.preview-row {
+height: 0.6rem;
+  background-color: var(--action);
+}
+
 
 .baton {
   display: inline-block;

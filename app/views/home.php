@@ -11,6 +11,7 @@
 <h1>berNimGame</h1>
 <?php var_dump($messages) ?>
 
+
       <div class="themeToggle">
     <button id="themeToggleBtn" class="toggle-btn">
         <i class="fa-solid fa-moon"></i>
