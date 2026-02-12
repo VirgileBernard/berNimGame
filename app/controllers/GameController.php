@@ -70,7 +70,7 @@ class GameController {
         $_SESSION['pyramide'] = $pyramide;
 
         $_SESSION['messages'][] = [
-            'text' => "Vous retirez $choix bâton(s) de la ligne " . ($ligne + 1),
+            'text' => "Tu retires $choix bâton(s) de la ligne " . ($ligne + 1),
             'class' => 'joueur1'
         ];
 
@@ -147,7 +147,7 @@ class GameController {
     $_SESSION['pyramide'] = $p;
 
     $_SESSION['messages'][] = [
-        'text' => "L'ordinateur retire $choix bâton(s) de la ligne " . ($ligne + 1),
+        'text' => "Je retire $choix bâton(s) de la ligne " . ($ligne + 1),
         'class' => 'ordi'
     ];
 
