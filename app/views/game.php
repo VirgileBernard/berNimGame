@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<h1>berNimGame</h1>
+
 <div class="themeToggle">
     <button id="themeToggleBtn" class="toggle-btn">
         <i class="fa-solid fa-moon"></i>
@@ -31,7 +31,7 @@
 <?php if (!$game_over): ?>
     <p class="tour-actuel <?= $tour ?>">
         <?php
-       echo ($tour === "joueur1") ? "Votre tour" : "Tour de l'ordinateur";
+       echo ($tour === "joueur1") ? "C'est ton tour !" : "C'est mon tour !";
 
         ?>
     </p>
