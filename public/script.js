@@ -150,7 +150,6 @@ if (victoryFlag && victoryFlag.dataset.winner === "joueur1") {
 
             // Message de victoire
             const div = document.createElement("div");
-            div.textContent = "Victoire !";
             div.style.position = "fixed";
             div.style.bottom = "15%";
             div.style.left = "50%";
@@ -165,3 +164,4 @@ if (victoryFlag && victoryFlag.dataset.winner === "joueur1") {
         }, 300);
     };
 }
+

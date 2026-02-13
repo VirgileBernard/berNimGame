@@ -31,6 +31,11 @@ class Router {
                 (new GameController())->end();
                 break;
 
+            case 'cv':
+                require "../app/controllers/GameController.php";
+                (new GameController())->cv();
+                break;
+
             default:
     require "../app/controllers/GameController.php";
     (new GameController())->home();

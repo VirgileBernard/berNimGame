@@ -1,6 +1,7 @@
 <?php ob_start(); ?>
 
 <div class="messages-welcome end-welcome">
+    <p class="berNimGame">the berNimGame</p>
     <h2 class="winner">
         <?= ($winner === "joueur1") ? "Félicitations, tu m'as battu !" : "On dirait que j'ai gagné, revanche ?" ?>
     </h2>
@@ -12,18 +13,18 @@
         <canvas id="confettiCanvas"></canvas>
     <?php endif; ?>
 
-    <a href="https://virgile-bernard.dev" class="btn-cv" target="_blank">
-        Voir mon CV
-    </a>
+        <form method="post" action="?action=reset">
+        <button type="submit">Rejouer</button>
+    </form>
 
-    <form method="post" action="?action=reset">
-    <button type="submit">Quitter la partie</button>
-</form>
+    <a href="?action=cv" class="btn">Voir le CV</a>
+<a href="cv.pdf" target="_blank" class="btn">Ouvrir en plein écran</a>
+<a href="cv.pdf" download class="btn">Télécharger</a>
+
 
 </div>
 
 <div id="victory-flag" data-winner="<?= $winner ?>"></div>
-
 
 <?php
 $content = ob_get_clean();

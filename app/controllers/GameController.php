@@ -170,4 +170,8 @@ public function end() {
     return $this->renderGame();
 }
 
+
+    public function cv(){
+        require "../app/views/cv.php";
+    }
 }
