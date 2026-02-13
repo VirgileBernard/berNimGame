@@ -35,7 +35,7 @@
 </div>
 
 <form method="post" action="?action=reset">
-    <button type="submit">Quitter la partie</button>
+    <button type="submit" class="btnGame">Quitter la partie</button>
 </form>
 </div>
 

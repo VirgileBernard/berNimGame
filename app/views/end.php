@@ -3,7 +3,7 @@
 <div class="messages-welcome end-welcome">
     <p class="berNimGame">the berNimGame</p>
     <h2 class="winner">
-        <?= ($winner === "joueur1") ? "Félicitations, tu m'as battu !" : "On dirait que j'ai gagné, revanche ?" ?>
+        <?= ($winner === "joueur1") ? "Tu as gagné !" : "On dirait que j'ai gagné, revanche ?" ?>
     </h2>
 </div>
 
@@ -14,10 +14,10 @@
     <?php endif; ?>
 
         <form method="post" action="?action=reset">
-        <button type="submit">Rejouer</button>
+        <button type="submit" class="btnGame"=>Rejouer</button>
     </form>
 
-    <a href="?action=cv" class="btn">Voir le CV</a>
+    <a href="?action=cv" class="btn">Me contacter</a>
 <a href="cv.pdf" target="_blank" class="btn">Ouvrir en plein écran</a>
 <a href="cv.pdf" download class="btn">Télécharger</a>
 

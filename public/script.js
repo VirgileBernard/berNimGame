@@ -12,7 +12,6 @@ if (slider && value && preview) {
         for (let i = 1; i <= n; i++) {
             const row = document.createElement("div");
             row.className = "preview-row";
-            row.style.width = `${i * 24}px`;
             preview.appendChild(row);
         }
     }
@@ -150,8 +149,9 @@ if (victoryFlag && victoryFlag.dataset.winner === "joueur1") {
 
             // Message de victoire
             const div = document.createElement("div");
+            div.textContent = "Félicitations"
             div.style.position = "fixed";
-            div.style.bottom = "15%";
+            div.style.bottom = "50%";
             div.style.left = "50%";
             div.style.transform = "translateX(-50%)";
             div.style.fontSize = "2.5rem";
