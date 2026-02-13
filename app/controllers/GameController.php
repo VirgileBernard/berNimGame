@@ -78,7 +78,9 @@ class GameController {
         if (array_sum($pyramide) === 0) {
             $_SESSION['game_over'] = true;
             $_SESSION['winner'] = "joueur1";
-            return $this->renderEnd();
+            header("Location: ?action=end");
+            exit;
+
         }
 
         // Tour de l'ordinateur
@@ -116,12 +118,15 @@ class GameController {
     }
 
 
-    private function renderEnd() {
-        $messages = $_SESSION['messages'] ?? [];
-        $winner   = $_SESSION['winner'] ?? null;
+public function end() {
+    session_start();
 
-        require "../app/views/end.php";
-    }
+    $messages = $_SESSION['messages'] ?? [];
+    $winner   = $_SESSION['winner'] ?? null;
+
+    require "../app/views/end.php";
+}
+
 
 
     public function reset() {
@@ -155,7 +160,9 @@ class GameController {
     if (array_sum($p) === 0) {
         $_SESSION['game_over'] = true;
         $_SESSION['winner'] = "ordi";
-        return $this->renderEnd();
+        header("Location: ?action=end");
+        exit;
+
     }
 
     // Retour au joueur
