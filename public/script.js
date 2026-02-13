@@ -1,4 +1,6 @@
-// prévisu de la pyramide (uniquement sur home.php)
+// ---------------------------------------------------------
+// PRÉVISU DE LA PYRAMIDE (uniquement sur home.php)
+// ---------------------------------------------------------
 const slider = document.getElementById("sliderPyramide");
 const value = document.getElementById("valeurPyramide");
 const preview = document.getElementById("previewPyramide");
@@ -26,13 +28,13 @@ if (slider && value && preview) {
 
 
 
-// Light/Dark Mode
+// ---------------------------------------------------------
+// LIGHT / DARK MODE
+// ---------------------------------------------------------
 
-// Sélecteurs
 const root = document.documentElement;
 const btn = document.getElementById("themeToggleBtn");
 
-// 1. Charger le thème stocké ou détecter le thème système
 const savedTheme = localStorage.getItem("theme");
 
 if (savedTheme) {
@@ -45,7 +47,6 @@ if (savedTheme) {
     updateIcon(defaultTheme);
 }
 
-// 2. Toggle au clic
 btn.addEventListener("click", () => {
     const current = root.getAttribute("data-theme");
     const next = current === "light" ? "dark" : "light";
@@ -54,7 +55,6 @@ btn.addEventListener("click", () => {
     updateIcon(next);
 });
 
-// 3. Changer l’icône selon le thème
 function updateIcon(theme) {
     if (theme === "light") {
         btn.innerHTML = '<i class="fa-solid fa-moon"></i>';
@@ -64,7 +64,11 @@ function updateIcon(theme) {
 }
 
 
-// JS pour les batons 
+
+// ---------------------------------------------------------
+// INTERACTIONS AVEC LES BATONS
+// ---------------------------------------------------------
+
 document.querySelectorAll(".baton").forEach(baton => {
 
     baton.addEventListener("mouseenter", () => {
@@ -119,3 +123,45 @@ document.querySelectorAll(".baton").forEach(baton => {
 
 });
 
+
+
+// ---------------------------------------------------------
+// CONFETTIS DE VICTOIRE (uniquement sur end.php)
+// ---------------------------------------------------------
+
+const victoryFlag = document.getElementById("victory-flag");
+
+if (victoryFlag && victoryFlag.dataset.winner === "joueur1") {
+
+    // Charger la librairie confetti
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js";
+    document.body.appendChild(script);
+
+    script.onload = () => {
+        setTimeout(() => {
+
+            // Confettis
+            confetti({
+                particleCount: 200,
+                spread: 90,
+                origin: { y: 0.6 }
+            });
+
+            // Message de victoire
+            const div = document.createElement("div");
+            div.textContent = "Victoire !";
+            div.style.position = "fixed";
+            div.style.bottom = "15%";
+            div.style.left = "50%";
+            div.style.transform = "translateX(-50%)";
+            div.style.fontSize = "2.5rem";
+            div.style.fontWeight = "bold";
+            div.style.color = "var(--text)";
+            div.style.textShadow = "0 0 10px rgba(0,0,0,0.5)";
+            div.style.animation = "fadeIn 1s ease-out";
+            document.body.appendChild(div);
+
+        }, 300);
+    };
+}

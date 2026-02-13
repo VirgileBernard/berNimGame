@@ -1,42 +1,31 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../public/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <title>Fin de partie</title>
-</head>
-<body>
+<?php ob_start(); ?>
 
-<h1>berNimGame</h1>
-
-<div class="themeToggle">
-    <button id="themeToggleBtn" class="toggle-btn">
-        <i class="fa-solid fa-moon"></i>
-    </button>
+<div class="messages-welcome end-welcome">
+    <h2 class="winner">
+        <?= ($winner === "joueur1") ? "Félicitations, tu m'as battu !" : "On dirait que j'ai gagné, revanche ?" ?>
+    </h2>
 </div>
 
-<div class="end-container">
+<div class="formContainer end-actions">
 
-    <h2 class="winner">
-        <?= ($winner === "joueur1") ? "Vous avez gagné 🎉" : "L'ordinateur a gagné 🤖" ?>
-    </h2>
+    <?php if ($winner === "joueur1"): ?>
+        <canvas id="confettiCanvas"></canvas>
+    <?php endif; ?>
 
-    <div class="messages-end">
-        <?php foreach ($messages as $msg): ?>
-            <p class="message <?= $msg['class'] ?>">
-                <?= htmlspecialchars($msg['text']) ?>
-            </p>
-        <?php endforeach; ?>
-    </div>
+    <a href="https://virgile-bernard.dev" class="btn-cv" target="_blank">
+        Voir mon CV
+    </a>
 
     <form method="post" action="?action=reset">
-        <button type="submit" class="btn-restart">Rejouer</button>
-    </form>
+    <button type="submit">Quitter la partie</button>
+</form>
 
 </div>
 
-<script src="../public/script.js"></script>
+<div id="victory-flag" data-winner="<?= $winner ?>"></div>
 
-</body>
-</html>
+
+<?php
+$content = ob_get_clean();
+$title = "Fin de partie - berNimGame";
+require "layout.php";
