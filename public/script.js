@@ -151,9 +151,9 @@ if (victoryFlag && victoryFlag.dataset.winner === "joueur1") {
 
             // Confettis
             confetti({
-                particleCount: 200,
-                spread: 90,
-                origin: { y: 0.6 }
+                particleCount: 2000,
+                spread: 180,
+                origin: { y: 0.5 }
             });
 
             // Message de victoire
@@ -174,6 +174,9 @@ if (victoryFlag && victoryFlag.dataset.winner === "joueur1") {
     };
 }
 
+
+// JS pour la modal CV 
+
 let modal = null
 
 const openModal = function (e) {
@@ -192,13 +195,17 @@ const openModal = function (e) {
 const closeModal = function (e) {
     if (modal === null) return
     e.preventDefault()
-    modal.style.display = "none"
     modal.setAttribute('aria-hidden', 'true')
     modal.removeAttribute('aria-modal')
     modal.removeEventListener('click', closeModal)
     modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)
     modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
-    modal = null
+    const hideModal = function () {
+        modal.style.display = "none"
+        modal.removeEventListener('animationend', hideModal)
+        modal = null
+    }
+     modal.addEventListener('animationend', hideModal)
 }
 
 const stopPropagation = function(e) {
