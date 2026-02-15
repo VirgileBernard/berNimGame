@@ -123,6 +123,10 @@ document.querySelectorAll(".baton").forEach(baton => {
 });
 
 
+// faire disparaitre les messages de jeu
+document.addEventListener("DOMContentLoaded", () => { const messages = document.querySelectorAll(".messages-jeu .message"); messages.forEach((msg, index) => { setTimeout(() => { msg.classList.add("fade-out"); }, 2500 + index * 300); }); });
+
+
 
 // ---------------------------------------------------------
 // CONFETTIS DE VICTOIRE (uniquement sur end.php)

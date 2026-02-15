@@ -69,10 +69,16 @@ class GameController {
         $pyramide[$ligne] -= $choix;
         $_SESSION['pyramide'] = $pyramide;
 
-        $_SESSION['messages'][] = [
-            'text' => "Tu retires $choix bâton(s) de la ligne " . ($ligne + 1),
-            'class' => 'joueur1'
-        ];
+       $_SESSION['messages'][] = [
+    'text' => "Tu retires $choix bâton" . ($choix > 1 ? 's' : '') . " de la ligne " . ($ligne + 1),
+    'class' => 'joueur1'
+];
+
+        // limiter le nbr de messages affichés
+        if (count($_SESSION['messages']) >4){
+            array_shift($_SESSION['messages']);
+        }
+
 
         // Fin de partie ?
         if (array_sum($pyramide) === 0) {
@@ -152,9 +158,16 @@ public function end() {
     $_SESSION['pyramide'] = $p;
 
     $_SESSION['messages'][] = [
-        'text' => "Je retire $choix bâton(s) de la ligne " . ($ligne + 1),
-        'class' => 'ordi'
-    ];
+    'text' => "Je retire $choix bâton" . ($choix > 1 ? 's' : '') . " de la ligne " . ($ligne + 1),
+    'class' => 'ordi'
+];
+
+    // limiter le nbr de messages affichés
+        if (count($_SESSION['messages']) >4){
+            array_shift($_SESSION['messages']);
+        }
+
+
 
     // Fin de partie ?
     if (array_sum($p) === 0) {
