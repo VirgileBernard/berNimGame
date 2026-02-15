@@ -64,11 +64,35 @@ body{
   background-color: var(--bg-dark);
   color: var(--text);
 }
-.gameContainer{
+
+.gameContainer {
+  min-height: 100vh;
   display: grid;
-  grid-template-rows: 25vh 1fr;
-  position: relative;
+  grid-template-rows: auto 1fr auto;
 }
+
+.gameHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+.gameContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.gameFooter {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+
 
 .messages-welcome{
   display: flex;

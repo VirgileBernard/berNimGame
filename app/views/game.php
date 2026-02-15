@@ -1,8 +1,5 @@
 <?php ob_start(); ?>
 
-<div class="messages-welcome">
-        <p class="berNimGame">the berNimGame</p>
-</div>
 
 <!-- message d'info de ce qui vient de se passer  -->
 
@@ -33,9 +30,6 @@
     <?php endforeach; ?>
 </div>
 
-<form method="post" action="?action=reset">
-    <button type="submit" class="btnGame">Quitter la partie</button>
-</form>
 </div>
 
 <?php if ($mode === "ordi" && $tour === "ordi" && !$game_over): ?>
@@ -58,6 +52,14 @@ JS;
 <?php endif; ?>
 
 <?php
+
+$actions = '
+<form method="post" action="?action=reset">
+    <button type="submit" class="btnGame">Quitter la partie</button>
+</form>
+';
+
+
 $content = ob_get_clean();
 $title = "Partie en cours - berNimGame";
 require "layout.php";

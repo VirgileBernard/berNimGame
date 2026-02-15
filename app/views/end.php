@@ -1,18 +1,11 @@
 <?php ob_start(); ?>
 
-<div class="messages-welcome end-welcome">
-    <p class="berNimGame">the berNimGame</p>
-</div>
 
 <div class="formContainer end-actions">
 
     <?php if ($winner === "joueur1"): ?>
         <canvas id="confettiCanvas"></canvas>
     <?php endif; ?>
-
-        <form method="post" action="?action=reset">
-        <button type="submit" class="btnGame">Rejouer</button>
-    </form>
 
 </div>
 
@@ -29,6 +22,14 @@
 <div id="victory-flag" data-winner="<?= $winner ?>"></div>
 
 <?php
+
+$actions = '
+<form method="post" action="?action=reset">
+    <button type="submit" class="btnGame">Rejouer</button>
+</form>
+';
+
+
 $content = ob_get_clean();
 $title = "Fin de partie - berNimGame";
 require "layout.php";

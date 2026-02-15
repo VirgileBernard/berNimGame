@@ -16,12 +16,31 @@
         </button>
     </div>
 
-    <!-- Ici on injecte le contenu spécifique -->
-    <?= $content ?>
+    <!-- HEADER GLOBAL -->
+    <header class="gameHeader">
+        <div class="messages-welcome">
+            <p class="berNimGame">the berNimGame</p>
+        </div>
+    </header>
 
-    <?php if (!empty($pageScript)) : ?> <script> <?= $pageScript ?> </script> <?php endif; ?>
+    <!-- CONTENU SPÉCIFIQUE -->
+    <main class="gameContent">
+        <?= $content ?>
+    </main>
+
+    <!-- ACTIONS (si définies) -->
+    <?php if (!empty($actions)) : ?>
+        <footer class="gameFooter">
+            <?= $actions ?>
+        </footer>
+    <?php endif; ?>
+
+    <?php if (!empty($pageScript)) : ?>
+        <script><?= $pageScript ?></script>
+    <?php endif; ?>
 
 </section>
+
 
 <script src="../public/script.js"></script>
 </body>
