@@ -150,33 +150,29 @@ body{
 }
 
 .preview-pyramide {
-  margin: 1rem auto;
+  margin: 1rem auto 2rem auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
+}
+
+.preview-pyramide,
+.pyramide{
+    height: 40vh;
 }
 
 
 button {
-  margin: 1rem auto;
   border-radius: var(--borderRadius);
-  padding: 3.5rem;
-  font-size: 3.5rem;
+  padding: 2rem;
+  font-size: 2rem;
   border: 1px solid var(--action);
   background-color: var(--bg-light);
   color: var(--text);
   text-align: center;
   cursor: pointer;
-  transition: background-color 0.3s, border-color 0.3s, transform 0.2s;
-}
-
-.btnGame {
-  position: fixed;
-  bottom: 10vh;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 999; /* utile si quelque chose les recouvre */
+  transition: all 0.3s;
 }
 
 
@@ -187,6 +183,7 @@ button:hover {
   color: var(--bg-dark);
   transform: scale(1.03); /* petit effet zoom */
 }
+
 
 .preview-row,
 .baton{
@@ -230,21 +227,21 @@ p{
     align-items: center;
     text-align: center;
     gap: 2rem;
+    /* height: 70vh; */
 }
 
 
 .pyramide {
     display: flex;
     flex-direction: column;
-    align-items: center; /* centre toutes les lignes */
-    /* margin: 20px 0; */
+    align-items: center;
     gap: 8px;
-    /* height: 40vh; */
+    height: 100%;
 }
 
 .ligne {
     display: flex;
-    justify-content: center; /* centre les bâtons dans chaque ligne */
+    justify-content: flex-start; /* centre les bâtons dans chaque ligne */
     gap: 8px;
 }
 
