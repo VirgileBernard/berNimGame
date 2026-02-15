@@ -25,7 +25,9 @@ class GameController {
         $_SESSION['pyramide'] = $pyramide;
 
         // Tirage du premier joueur
-        $_SESSION['tour'] = rand(0,1) ? "joueur1" : "ordi";
+        // $_SESSION['tour'] = rand(0,1) ? "joueur1" : "ordi";
+
+        $_SESSION['tour'] = "joueur1";
 
         $_SESSION['messages'][] = ['text' => "Pyramide créée.", 'class' => 'setting'];
 
