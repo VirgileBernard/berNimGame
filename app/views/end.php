@@ -11,9 +11,9 @@
 
 <aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display:none;">
     <div class="modal-wrapper js-modal-stop">
-        <button class="js-modal-close">Fermer</button>
-        <h1 id="titlemodal">Mon CV</h1>
-        <img src="../public/cv.png" alt="monCV">
+        <!-- <button class="js-modal-close"><i class="fa-solid fa-x"></i></button> -->
+        <!-- <h1 id="titlemodal">Mon CV</h1> -->
+        <img src="../public/cv.png" alt="monCV" class="cv">
     </div>
 </aside>
 

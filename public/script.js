@@ -185,8 +185,7 @@ if (victoryFlag) {
 }
 
 
-
-// JS pour la modal CV 
+// JS pour la modal CV
 
 let modal = null
 
@@ -194,48 +193,73 @@ const openModal = function (e) {
     e.preventDefault()
     const targetSelector = e.target.getAttribute('data-target')
     const target = document.querySelector(targetSelector)
+    if (!target) return
+
     target.style.display = "flex"
     target.removeAttribute('aria-hidden')
     target.setAttribute('aria-modal', 'true')
     modal = target
 
+    // Fermer en cliquant sur l'overlay
     modal.addEventListener('click', closeModal)
-    modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
-    modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
+
+    // Fermer via bouton X (si présent)
+    const btnClose = modal.querySelector('.js-modal-close')
+    if (btnClose) {
+        btnClose.addEventListener('click', closeModal)
+    }
+
+    // Stop propagation sur le contenu
+    const modalContent = modal.querySelector('.js-modal-stop')
+    if (modalContent) {
+        modalContent.addEventListener('click', stopPropagation)
+    }
 }
 
-
 const closeModal = function (e) {
-    if (modal === null) return
+    if (!modal) return
     e.preventDefault()
+
     modal.setAttribute('aria-hidden', 'true')
     modal.removeAttribute('aria-modal')
+
     modal.removeEventListener('click', closeModal)
-    modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)
-    modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
+
+    // Retirer listener sur le bouton X (si présent)
+    const btnClose = modal.querySelector('.js-modal-close')
+    if (btnClose) {
+        btnClose.removeEventListener('click', closeModal)
+    }
+
+    // Retirer listener sur le contenu
+    const modalContent = modal.querySelector('.js-modal-stop')
+    if (modalContent) {
+        modalContent.removeEventListener('click', stopPropagation)
+    }
+
     const hideModal = function () {
         modal.style.display = "none"
         modal.removeEventListener('animationend', hideModal)
         modal = null
     }
-     modal.addEventListener('animationend', hideModal)
+    modal.addEventListener('animationend', hideModal)
 }
 
 const stopPropagation = function(e) {
     e.stopPropagation()
 }
 
-document.querySelectorAll('.js-modal').forEach(a => {
-    a.addEventListener('click', openModal)
+// Boutons pour ouvrir la modal
+document.querySelectorAll('.js-modal').forEach(btn => {
+    btn.addEventListener('click', openModal)
 })
 
+// Fermer la modal avec Escape
 window.addEventListener('keydown', function (e){
     if(e.key === "Escape" || e.key === "Esc"){
         closeModal(e)
     }
 })
-
-
 
 
 

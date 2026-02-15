@@ -318,13 +318,17 @@ p{
 }
 
 .modal-wrapper{
-  background-color: #fff;
+  /* background-color: #fff; */
   /* width: 600px; */
-  max-width: calc(100vw - 20px);
+  max-width: calc(100vw - 100px);
   max-height: calc(100vh - 20px);
-  padding: 20px;
+  /* padding: 40px; */
   overflow: auto;
   animation: slideFromTop .3s both;
+}
+
+.cv{
+width: 100%;
 }
 
 .modal[aria-hidden="true"]{
@@ -334,6 +338,7 @@ p{
 .modal[aria-hidden="true"] .modal-wrapper{
     animation: slideToBottom .5s both;
 }
+
 
 @keyframes fadeIn{
   from {opacity: 0;}
