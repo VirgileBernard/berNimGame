@@ -2,9 +2,6 @@
 
 <div class="messages-welcome end-welcome">
     <p class="berNimGame">the berNimGame</p>
-    <h2 class="winner">
-        <?= ($winner === "joueur1") ? "Tu as gagné !" : "On dirait que j'ai gagné, revanche ?" ?>
-    </h2>
 </div>
 
 <div class="formContainer end-actions">
@@ -14,15 +11,20 @@
     <?php endif; ?>
 
         <form method="post" action="?action=reset">
-        <button type="submit" class="btnGame"=>Rejouer</button>
+        <button type="submit" class="btnGame">Rejouer</button>
     </form>
 
-    <a href="?action=cv" class="btn">Me contacter</a>
-<a href="cv.pdf" target="_blank" class="btn">Ouvrir en plein écran</a>
-<a href="cv.pdf" download class="btn">Télécharger</a>
-
-
 </div>
+
+<a href="#modal1" class="js-modal">Ouvrir mon CV</a>
+
+<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display:none;">
+    <div class="modal-wrapper js-modal-stop">
+        <button class="js-modal-close">Fermer</button>
+        <h1 id="titlemodal">Mon CV</h1>
+        <img src="../public/cv.png" alt="monCV">
+    </div>
+</aside>
 
 <div id="victory-flag" data-winner="<?= $winner ?>"></div>
 

@@ -2,7 +2,6 @@
 
 <div class="messages-welcome">
         <p class="berNimGame">the berNimGame</p>
-        <p>Celui qui prend le dernier baton gagne</p>
 </div>
 
 <!-- message d'info de ce qui vient de se passer  -->

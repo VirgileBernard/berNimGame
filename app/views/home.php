@@ -1,7 +1,6 @@
 <?php ob_start(); ?>
 
 <div class="messages-welcome">
-    <p class="welcome">Welcome to</p>
     <p class="berNimGame">the berNimGame</p>
 </div>
 
