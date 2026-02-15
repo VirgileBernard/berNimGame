@@ -136,43 +136,54 @@ document.addEventListener("DOMContentLoaded", () => { const messages = document.
 // ---------------------------------------------------------
 // CONFETTIS DE VICTOIRE (uniquement sur end.php)
 // ---------------------------------------------------------
-
 const victoryFlag = document.getElementById("victory-flag");
 
-if (victoryFlag && victoryFlag.dataset.winner === "joueur1") {
+if (victoryFlag) {
+    const winner = victoryFlag.dataset.winner;
 
-    // Charger la librairie confetti
-    const script = document.createElement("script");
-    script.src = "https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js";
-    document.body.appendChild(script);
+    const div = document.createElement("div");
+    div.style.position = "fixed";
+    div.style.top = "50%";
+    div.style.left = "50%";
+    div.style.transform = "translate(-50%, -50%) scale(0)";
+    div.style.fontSize = "4rem";
+    div.style.fontWeight = "bold";
+    div.style.color = "var(--text)";
+    div.style.textAlign = "center";
+    div.style.zIndex = 2;
+    div.style.transition = "transform 0.6s ease, opacity 0.6s ease";
+    div.style.opacity = 0;
 
-    script.onload = () => {
-        setTimeout(() => {
+    if (winner === "joueur1") {
+        // Victoire
+        div.innerHTML = "Félicitations!<br>Tu m'as battu!";
 
-            // Confettis
-            confetti({
-                particleCount: 2000,
-                spread: 180,
-                origin: { y: 0.5 }
-            });
+        // Confettis
+        const script = document.createElement("script");
+        script.src = "https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js";
+        document.body.appendChild(script);
+        script.onload = () => {
+            setTimeout(() => {
+                confetti({
+                    particleCount: 2000,
+                    spread: 180,
+                    origin: { y: 0.5 }
+                });
+            }, 300);
+        };
+    } else {
+        // Défaite
+    div.innerHTML = "Perdu!<br>Retente ta chance…";
+    }
 
-            // Message de victoire
-            const div = document.createElement("div");
-            div.textContent = "Félicitations"
-            div.style.position = "fixed";
-            div.style.bottom = "50%";
-            div.style.left = "50%";
-            div.style.transform = "translateX(-50%)";
-            div.style.fontSize = "4rem";
-            div.style.fontWeight = "bold";
-            div.style.color = "var(--text)";
-            div.style.textShadow = "0 0 10px rgba(0,0,0,0.5)";
-            div.style.animation = "fadeIn 1s ease-out";
-            document.body.appendChild(div);
+    document.body.appendChild(div);
 
-        }, 300);
-    };
+    setTimeout(() => {
+        div.style.transform = "translate(-50%, -50%) scale(1)";
+        div.style.opacity = 1;
+    }, 50);
 }
+
 
 
 // JS pour la modal CV 

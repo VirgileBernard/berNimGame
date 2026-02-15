@@ -23,7 +23,7 @@
 
 $actions = '
 <button type="button" class="btnGame js-modal" data-target="#modal1">
-    Ouvrir mon CV
+    Qui suis-je?
 </button>
 
 <form method="post" action="?action=reset">
