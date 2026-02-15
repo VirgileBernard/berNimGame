@@ -65,6 +65,42 @@ body{
   color: var(--text);
 }
 
+form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+
+p{
+  text-align: center;
+}
+
+button {
+  border-radius: var(--borderRadius);
+padding: clamp(0.6rem, 1.5vw, 1.2rem);
+font-size: clamp(0.9rem, 2vw, 1.5rem);
+  border: 1px solid var(--action);
+  background-color: var(--bg-light);
+  color: var(--text);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+
+/* Bouton hover */
+button:hover {
+  /* border-color: var(--action); */
+  background-color: var(--action);
+  color: var(--bg-dark);
+  transform: scale(1.03); /* petit effet zoom */
+}
+
+
+
 .gameContainer {
   min-height: 100vh;
   display: grid;
@@ -108,7 +144,7 @@ body{
 
 .messages-jeu,
 .tour-actuel{
-  font-size: 2.5rem;
+ font-size: clamp(1.2rem, 4vw, 1.5rem);
 }
 
 .messages-jeu .message {
@@ -139,13 +175,9 @@ body{
   justify-content: center;
   align-items: center;
 }
-.welcome{
-  font-size: 5rem;
-  /* font-weight: bolder; */
-   font-family: var(--funny-font);
-}
+
 .berNimGame{
-  font-size: 5rem;
+font-size: clamp(2rem, 6vw, 2.5rem);
   font-weight: bolder;
 }
 
@@ -155,9 +187,11 @@ body{
   right: 10vw;
      }
       .toggle-btn {
-          padding: 2rem;
-         width: 84px;
-          height: 84px;
+   /* Taille fluide du bouton */ 
+   width: clamp(48px, 6vw, 70px); 
+   height: clamp(48px, 6vw, 70px);
+    /* Padding fluide */ 
+    padding: clamp(0.6rem, 1.5vw, 1.2rem);
            border-radius: 50%; 
            border: 1px solid var(--border);
             background-color: var(--bg);
@@ -169,7 +203,7 @@ body{
                   color: var(--text-secondary);
                  }
                   .toggle-btn i { 
-                    font-size: 2.6rem;
+                    font-size: clamp(1.2rem, 3vw, 2rem);
                  } 
                  .toggle-btn:hover { 
                     background-color: var(--bg-light); 
@@ -212,29 +246,6 @@ body{
     height: 40vh;
 }
 
-
-button {
-  border-radius: var(--borderRadius);
-  padding: 2rem;
-  font-size: 2rem;
-  border: 1px solid var(--action);
-  background-color: var(--bg-light);
-  color: var(--text);
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-
-/* Bouton hover */
-button:hover {
-  /* border-color: var(--action); */
-  background-color: var(--action);
-  color: var(--bg-dark);
-  transform: scale(1.03); /* petit effet zoom */
-}
-
-
 .preview-row,
 .baton{
   height: 10vh;
@@ -260,17 +271,6 @@ width: clamp(60px, 6vw, 80px);
 }
 
 
-form{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-p{
-  text-align: center;
-}
-
 .formContainer {
     display: flex;
     flex-direction: column;
@@ -284,7 +284,7 @@ p{
 .pyramide {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     gap: 8px;
     height: 100%;
 }
