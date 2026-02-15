@@ -237,7 +237,7 @@ button:hover {
 .preview-row,
 .baton{
   height: 10vh;
-  width: 6vw;
+width: clamp(60px, 6vw, 80px);
   background-color: var(--action);
   border-radius: var(--borderRadius);
 }
@@ -360,17 +360,3 @@ width: 100%;
   to {transform: translateY(50px);}
 }
 
-@keyframes popLose {
-    0% { transform: scale(0) rotate(0deg); opacity: 0; }
-    60% { transform: scale(1.2) rotate(3deg); opacity: 1; }
-    100% { transform: scale(1) rotate(0deg); }
-}
-
-@keyframes glitch {
-  0% { transform: translate(0); }
-  20% { transform: translate(-2px, 2px); }
-  40% { transform: translate(2px, -2px); }
-  60% { transform: translate(-2px, -2px); }
-  80% { transform: translate(2px, 2px); }
-  100% { transform: translate(0); }
-}
