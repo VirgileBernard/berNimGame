@@ -163,7 +163,7 @@ if (victoryFlag && victoryFlag.dataset.winner === "joueur1") {
             div.style.bottom = "50%";
             div.style.left = "50%";
             div.style.transform = "translateX(-50%)";
-            div.style.fontSize = "2.5rem";
+            div.style.fontSize = "4rem";
             div.style.fontWeight = "bold";
             div.style.color = "var(--text)";
             div.style.textShadow = "0 0 10px rgba(0,0,0,0.5)";
@@ -181,7 +181,8 @@ let modal = null
 
 const openModal = function (e) {
     e.preventDefault()
-    const target = document.querySelector(e.target.getAttribute('href'))
+    const targetSelector = e.target.getAttribute('data-target')
+    const target = document.querySelector(targetSelector)
     target.style.display = "flex"
     target.removeAttribute('aria-hidden')
     target.setAttribute('aria-modal', 'true')
@@ -191,6 +192,7 @@ const openModal = function (e) {
     modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
     modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
 }
+
 
 const closeModal = function (e) {
     if (modal === null) return

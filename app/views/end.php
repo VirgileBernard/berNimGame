@@ -9,8 +9,6 @@
 
 </div>
 
-<a href="#modal1" class="js-modal">Ouvrir mon CV</a>
-
 <aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display:none;">
     <div class="modal-wrapper js-modal-stop">
         <button class="js-modal-close">Fermer</button>
@@ -24,10 +22,17 @@
 <?php
 
 $actions = '
+<button type="button" class="btnGame js-modal" data-target="#modal1">
+    Ouvrir mon CV
+</button>
+
 <form method="post" action="?action=reset">
-    <button type="submit" class="btnGame">Rejouer</button>
+    <button type="submit" class="btnGame">
+        Rejouer
+    </button>
 </form>
 ';
+
 
 
 $content = ob_get_clean();
